@@ -1,0 +1,18 @@
+.footer{
+    display: flex;
+    justify-content: space-around;
+    padding: 50px;
+    font-family: 'Montserrat', sans-serif;
+    border-top: 2px solid gray;
+}
+.logo{
+    width: 230px;
+    height: 63px;
+}
+.footer>ul>li{
+    padding: 8px;
+}
+li>span{
+    font-weight: 600;
+    font-size: 20px;
+}

@@ -1,0 +1,16 @@
+/* @import '../css/reset.css'; */
+@import '../css/header.css';
+@import '../css/Content.css';
+@import '../css/AllBook.css';
+@import '../css/Footer.css';
+@import '../css/Detail.css';
+@import '../css/Auth.css';
+@import '../css/CartPage.css';
+@import '../css/Profile.css';
+@import '../css/ModalAdd.css';
+@import '../css/StatusPage.css';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Roboto:wght@400;500;700;900&display=swap');
+@import '../css/reset.css';
+body{
+    font-family: 'Montserrat', sans-serif;
+}
