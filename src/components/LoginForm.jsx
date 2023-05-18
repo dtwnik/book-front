@@ -23,7 +23,6 @@ const LoginForm = () => {
                 localStorage.setItem("lastname", data.data.last_name)
                 localStorage.setItem("firstname", data.data.first_name)
                 localStorage.setItem("email", data.data.email)
-                // localStorage.setItem("deposit", data.data.deposit)
                 navigate('/')
             }
             catch (e) {

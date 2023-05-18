@@ -26,7 +26,7 @@ const Psychology = () => {
                     {appState.map((Book) => 
                         <div key={Book.url}>
                             <div className="card">
-                                <BookCard Book={Book}/>
+                                <BookCard book={Book}/>
                             </div>
                         </div>
                     )}

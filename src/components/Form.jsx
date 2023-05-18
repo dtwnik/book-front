@@ -16,21 +16,26 @@ const Form = () => {
         e.preventDefault()
         if (username !== "" && password !== "") {
             try{
-            const data = await axios.post(
-                'http://127.0.0.1:8000/api/User/',
-                { username: username, password: password , last_name: last, first_name: first, email: email}
-            )
+                const data = await axios.post(
+                    'http://127.0.0.1:8000/api/User/',
+                    {
+                      username: username,
+                      password: password,
+                      last_name: last,
+                      first_name: first,
+                      email: email
+                    }
+                  );
             localStorage.setItem("id", data.data.id)
             localStorage.setItem("username", username)
             localStorage.setItem("token", data.data.token)
             localStorage.setItem("lastname", data.data.last_name)
             localStorage.setItem("firstname", data.data.first_name)
             localStorage.setItem("email", data.data.email)
-            // localStorage.setItem("deposit", data.data.deposit)   
             navigate('/')
             }
             catch(e) {
-                alert("ГГ ВП")
+                alert("Берілген пайдалланушы аты бос емес")
             }
         }
     }
