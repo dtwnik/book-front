@@ -22,6 +22,7 @@ const Header = () => {
             localStorage.removeItem("lastname")
             localStorage.removeItem("firstname")
             localStorage.removeItem("email")
+            localStorage.removeItem("deposite")
             setIsAuth(false)
             setUsername("")
             navigate('/')
@@ -38,20 +39,18 @@ const Header = () => {
         if (id && login) {
             setIsAuth(true)
         }
-        if(login == 'Admin' || login == 'Karakat'){
+        if(login === 'Admin' || login === 'Karakat'){
             setIsSuperUser(true)
-            console.log(login)
         }
         else{
             setIsSuperUser(false)
         }
     }, [setCount]);
-    console.log(isSuperUser)
     return (
         <>
             <section id='header'>
                 <div className="logo">
-                    <img src={logo} />
+                    <img src={logo}/>
                 </div>
                 <div className="nav-item">
                     <ul>
@@ -88,7 +87,7 @@ const Header = () => {
                     <div className="cart">
                         <Link to={'/cart/'}>
                             <div className="cart-thumb">
-                                <img src={icon} />
+                                <img src={icon} alt=""/>
                                 {count ? <span className='label'>{count}</span> : <span className='label'>0</span>}
 
                             </div>

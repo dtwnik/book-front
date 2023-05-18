@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const ProfilePage = () => {
-    // let dep = JSON.parse(localStorage.getItem('deposit'))
+    const [modalActive, setModalActive] = useState(false)
+    const [appState, setAppState] = useState([]);
     const token = `Token ${localStorage.getItem('token')}`
     const [showInput, setShowInput] = useState(false);
     const [inputValue, setInputValue] = useState('');
@@ -14,14 +15,23 @@ const ProfilePage = () => {
     let firstname = localStorage.getItem("firstname")
     let lastname = localStorage.getItem("lastname")
     let userId = localStorage.getItem("id")
-    let userLink = 'http://127.0.0.1:8000/api/User/' + userId + '/'
-    console.log(userLink)
+    let userLink = `http://127.0.0.1:8000/api/Deposite/${userId}/`
     useEffect(() => {
-        const previousTotalValue = localStorage.getItem('totalValue');
-        if (previousTotalValue) {
-            setTotalValue(parseFloat(previousTotalValue));
-        }
-    }, []);
+        axios.get(userLink, {
+            headers: {
+                "Authorization": token
+            }
+        }).then((resp) => {
+            const allTicket = resp.data;
+            setAppState(allTicket);
+            const previousTotalValue = resp.data.deposite;
+            if (previousTotalValue) {
+                setTotalValue(parseFloat(previousTotalValue));
+            }
+        });
+        
+            
+    }, [setAppState]);
 
     const handleInputChange = (e) => {
         setInputValue(e.target.value);
@@ -32,10 +42,14 @@ const ProfilePage = () => {
         if (!isNaN(parsedInputValue)) {
             const newTotalValue = totalValue + parsedInputValue;
             setTotalValue(newTotalValue);
-            localStorage.setItem('deposit', newTotalValue);
+            localStorage.setItem('deposite', newTotalValue);
             setInputValue('');
-            console.log(totalValue)
-            axios.patch(userLink, { Deposit: totalValue });
+            setModalActive(true)
+            setTimeout(() => {
+                alert('Тапсырыс берілді')
+                setModalActive(false)
+            }, 1000);
+            axios.patch(userLink, { deposite: newTotalValue }, { headers: { Authorization: token } });
         }
     };
     const add = () => {
@@ -71,7 +85,7 @@ const ProfilePage = () => {
                             <h1>{totalValue} Тнг</h1>
                         </div>
                         <button className="profile-button" onClick={add}>
-                            <span class="button_top"> Толықтыру
+                            <span className="button_top"> Толықтыру
                             </span>
 
                         </button>
@@ -79,8 +93,8 @@ const ProfilePage = () => {
 
                     </div>
                     {showInput &&
-                        <div class="input-wrapper">
-                            <input type="number" placeholder="Сомманы енгізіңіз" name="text" class="input2" onChange={handleInputChange} />
+                        <div className="input-wrapper">
+                            <input type="number" placeholder="Сомманы енгізіңіз" name="text" className="input2" onChange={handleInputChange} />
                             <button className='adv-button2' onClick={handleAddToCart}>Депозитка қосу</button>
 
                         </div>
@@ -88,6 +102,7 @@ const ProfilePage = () => {
 
                 </div>
             </div>
+            <div className={modalActive ? "modal active" : "modal"}><div className="loader"></div></div>
         </>
     );
 }

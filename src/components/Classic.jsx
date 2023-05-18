@@ -23,7 +23,7 @@ const Classic = () => {
                 </div>
                 <div className="div-content">
                     {appState.map((Book) =>
-                        <div key={Book.id}>
+                        <div key={Book.url}>
                             <div className="card">
                                 <BookCard Book={Book} />
                             </div>

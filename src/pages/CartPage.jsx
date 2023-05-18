@@ -49,8 +49,8 @@ const CartPage = () => {
                     <div className="cart-info">
                         <div className="cart-desc">
                             {list.map((clothe) =>
-                                <div key={clothe.title} className="cartimg">
-                                    <img src={clothe.photo}/>
+                                <div key={clothe.url} className="cartimg">
+                                    <img src={clothe.photo} alt=""/>
                                     <div className="order-title">
                                         <h1>Кітап атауы:  <span>{clothe.Book_name}</span></h1>
                                         <h5>Авторы: {clothe.author}</h5>

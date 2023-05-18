@@ -17,14 +17,14 @@ const Contact = () => {
                 <form className="input-data">
                 <h1>Байланыс</h1>
                 <div className="form-control">
-                    <input class="input input-alt" placeholder="Атыңыз" required type="text"/>
-                    <span class="input-border input-border-alt"></span>
+                    <input className="input input-alt" placeholder="Атыңыз" required type="text"/>
+                    <span className="input-border input-border-alt"></span>
                 </div>
                 <div className="form-control">
-                    <input class="input input-alt" placeholder="Телефон нөміріңіз" required type="number"/>
-                    <span class="input-border input-border-alt"></span>
+                    <input className="input input-alt" placeholder="Телефон нөміріңіз" required type="number"/>
+                    <span className="input-border input-border-alt"></span>
                 </div>
-                <button type="submit" class="cta" onClick={post}>
+                <button type="submit" className="cta" onClick={post}>
                     <span>Жіберу</span>
                     <svg viewBox="0 0 13 10" height="10px" width="15px">
                         <path d="M1,5 L11,5"></path>

@@ -7,7 +7,7 @@ const StatusPage = () => {
     const [appState, setAppState] = useState([]);
     const [isArrived, setIsArrived] = useState(false)
     const [username, setUsername] = useState("")
-    const patchReq = (id) =>{
+    const patchReq = (id) => {
         const updatedIsArrived = true;
         setIsArrived(updatedIsArrived);
         axios.patch(id, { arrived: updatedIsArrived }, { headers: { Authorization: token } });
@@ -24,10 +24,10 @@ const StatusPage = () => {
             const allTicket = resp.data;
             setAppState(allTicket);
         });
-    }, [appState,isArrived]);
+    }, [appState, isArrived, token]);
 
-    
-    if(!appState || appState.length === 0)return <><Header/><p className='notdefined'>Тапсырыстарыңыз жоқ!</p></>
+
+    if (!appState || appState.length === 0) return <><Header /><p className='notdefined'>Тапсырыстарыңыз жоқ!</p></>
     return (
         <>
             <Header />
@@ -38,32 +38,34 @@ const StatusPage = () => {
             </div>
             <div className="order">
                 <table>
-                    <tr>
-                        <th>Тапсырыс №</th>
-                        <th>Тапсырыс беруші</th>
-                        <th>Мекен-жайы</th>
-                        <th className='txt'>Кітап атаулары</th>
-                        <th>Жеткізу күні</th>
-                        <th>Жеткізілді</th>
-                        <th>Қайтарылу күні</th>
-                        <th>Қайтарылды</th>
-                    </tr>
-                    {appState.map((book) =>
+                    <thead>
                         <tr>
-                            <th className='txt'>{book.url.split('/')[5]}</th>
-                            <th className='txt'>{username}</th>
-                            <th className='txt'>{book.address}</th>
-                            <th className='th txt'>{book.book}</th>
-                            <th className='txt'>{book.created_at}</th>
-                            {book.arrived ? <th className='success'>Жеткізілді</th>:<th className='confirm-btn' onClick={()=> patchReq(book.url) }>Растау</th>}
-                            <th className='txt'>{book.due_date}</th>
-                            {book.returned ? <th className='txt success'>Қайтарылды</th>:<th className='txt'>Қайтарылмады</th>}
+                            <th>Тапсырыс №</th>
+                            <th>Тапсырыс беруші</th>
+                            <th>Мекен-жайы</th>
+                            <th className='txt'>Кітап атаулары</th>
+                            <th>Жеткізу күні</th>
+                            <th>Жеткізілді</th>
+                            <th>Қайтарылу күні</th>
+                            <th>Қайтарылды</th>
                         </tr>
-                    )}
-
+                    </thead>
+                    <tbody>
+                        {appState.map((book) =>
+                            <tr key={book.url}>
+                                <th className='txt'>{book.url.split('/')[5]}</th>
+                                <th className='txt'>{username}</th>
+                                <th className='txt'>{book.address}</th>
+                                <th className='th txt'>{book.book}</th>
+                                <th className='txt'>{book.created_at}</th>
+                                {book.arrived ? <th className='success'>Жеткізілді</th> : <th className='confirm-btn' onClick={() => patchReq(book.url)}>Растау</th>}
+                                <th className='txt'>{book.due_date}</th>
+                                {book.returned ? <th className='txt success'>Қайтарылды</th> : <th className='txt'>Қайтарылмады</th>}
+                            </tr>
+                        )}
+                    </tbody>
                 </table>
             </div>
-
         </>
     );
 }
